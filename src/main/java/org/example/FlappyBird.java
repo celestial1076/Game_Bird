@@ -43,20 +43,21 @@ public class FlappyBird extends JPanel implements ActionListener {
         score = 0; // Начальные очки
         pipes = new ArrayList<>(); // Инициализация списка труб
         gameOver = false; // Игра не закончена
+        gameStarted = false; // Запуск игры без начала движения
 
         // Кнопка входа в игру
         startButton = new JButton("Start");
-        startButton.setBounds(WIDTH / 4, HEIGHT / 2 - 30, 100,50);
+        startButton.setBounds(WIDTH / 3 + 12, HEIGHT / 2 + 50, 100,50);
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetGame();
+                gameStarted = true;
             }
         });
 
         setLayout(null);
         add(startButton);
-
 
         // Обработка нажатий клавиш
         addKeyListener(new KeyAdapter() {
@@ -73,6 +74,8 @@ public class FlappyBird extends JPanel implements ActionListener {
         Timer timer = new Timer(25, this); // Таймер обновления игры
         timer.start(); // Запуск таймера
         spawnPipe(); // Создание первой трубы
+
+        //
     }
 
     private void loadImages() {
@@ -114,18 +117,18 @@ public class FlappyBird extends JPanel implements ActionListener {
         if (gameOver) { // Если игра окончена
             g.setFont(new Font("Arial", Font.BOLD, 30)); // Установка шрифта
             g.drawString("Game Over", WIDTH / 3, HEIGHT / 2); // Сообщение об окончании игры
-            g.drawString("Press SPACE to Restart", WIDTH / 12, HEIGHT / 2 + 40);// Подсказка для перезапуска
+            g.drawString("Press Button to Restart", WIDTH / 12, HEIGHT / 2 + 40);// Подсказка для перезапуска
             startButton.setVisible(true); // Отображение кнопки
         }
         else {
-            startButton.setVisible(false); // Скрытие кнопки
+            startButton.setVisible(!gameStarted); // Скрытие кнопки
         }
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!gameOver) { // Если игра не окончена
+        if (!gameOver&&gameStarted) { // Если игра не окончена
             birdY += birdVelocity; // Обновление позиции Y птицы
             birdVelocity += GRAVITY; // Применение силы притяжения
 
@@ -168,6 +171,9 @@ public class FlappyBird extends JPanel implements ActionListener {
         score = 0; // Сброс счета
         pipes.clear(); // Очистка списка труб
         gameOver = false; // Установка флага окончания игры
+        gameStarted = false; //
+        startButton.setVisible(true); //
+
         spawnPipe(); // Создание новой трубы
     }
 
