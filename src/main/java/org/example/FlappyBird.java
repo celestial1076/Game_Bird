@@ -46,8 +46,13 @@ public class FlappyBird extends JPanel implements ActionListener {
         gameStarted = false; // Запуск игры без начала движения
 
         // Кнопка входа в игру
-        startButton = new JButton("Start");
-        startButton.setBounds(WIDTH / 3 + 12, HEIGHT / 2 + 50, 100,50);
+        startButton = new JButton("Start"); // Текст кнопки
+        startButton.setFont(new Font("Corbel", Font.BOLD, 20)); // Шрифт кнопки
+        startButton.setForeground(Color.black); // Цвет кнопки
+        startButton.setBackground(new Color(255, 244, 255)); // Задний фон кнопки
+        startButton.setBounds(WIDTH / 3 + 12, HEIGHT / 2 + 50, 100,50); // Размер кнопки
+
+        // Перезапуск игры
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +61,7 @@ public class FlappyBird extends JPanel implements ActionListener {
             }
         });
 
-        setLayout(null);
+        setLayout(null); // Установка кнопки
         add(startButton);
 
         // Обработка нажатий клавиш
@@ -112,10 +117,11 @@ public class FlappyBird extends JPanel implements ActionListener {
             g.drawImage(pipeImage, pipe.x, pipe.y, PIPE_WIDTH, pipe.height, null); // Отрисовка труб
         }
         g.setColor(Color.black); // Установка цвета текста
+        g.setFont(new Font("Corbel", Font.BOLD, 14));
         g.drawString("Score: " + score, 10, 20); // Отображение счёта
         g.drawString("High Score: " + highScore, 10, 40); // Отображение лучшего счёта
         if (gameOver) { // Если игра окончена
-            g.setFont(new Font("Arial", Font.BOLD, 30)); // Установка шрифта
+            g.setFont(new Font("Corbel", Font.BOLD, 30)); // Установка шрифта
             g.drawString("Game Over", WIDTH / 3, HEIGHT / 2); // Сообщение об окончании игры
             g.drawString("Press Button to Restart", WIDTH / 12, HEIGHT / 2 + 40);// Подсказка для перезапуска
             startButton.setVisible(true); // Отображение кнопки
@@ -171,8 +177,8 @@ public class FlappyBird extends JPanel implements ActionListener {
         score = 0; // Сброс счета
         pipes.clear(); // Очистка списка труб
         gameOver = false; // Установка флага окончания игры
-        gameStarted = false; //
-        startButton.setVisible(true); //
+        gameStarted = false; // Изменяем флаг начала игры
+        startButton.setVisible(true); // изменяем флаг кнопки
 
         spawnPipe(); // Создание новой трубы
     }
