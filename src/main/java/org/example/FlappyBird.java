@@ -227,3 +227,4 @@ public class FlappyBird extends JPanel implements ActionListener {
         frame.setResizable(false); // Запрещение изменения размера окна
     }
 }
+// Finally
