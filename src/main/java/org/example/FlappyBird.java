@@ -13,11 +13,12 @@ import java.util.Random; // Импорт для генерации случай�
 
 public class FlappyBird extends JPanel implements ActionListener {
     private final int WIDTH = 400, HEIGHT = 600; // Ширина и высота игрового окна
-    private final int BIRD_DIAMETER = 65; // Диаметр птицы
+    private final int BIRD_DIAMETER = 50; // Диаметр птицы
     private final int GRAVITY = 1; // Сила притяжения (2)
     private final int JUMP_STRENGTH = -8; // Сила прыжка (-10)
     private final int PIPE_WIDTH = 52; // Ширина трубы
     private final int PIPE_GAP = 150; // Интервал между верхней и нижней трубами
+    private long prevTime = System.currentTimeMillis();
 
     private Image birdImage; // Изображение птицы
     private Image pipeImage; // Изображение трубы
@@ -110,6 +111,15 @@ public class FlappyBird extends JPanel implements ActionListener {
 
     @Override
     protected void paintComponent(Graphics g) {
+
+//        long newTime = System.currentTimeMillis();
+
+//        while (true) {
+//        if((newTime - prevTime) > 100) {
+//            onDraw()
+//            prevTime = newTime;
+//        }}
+
         super.paintComponent(g); // Вызов метода родительского класса
         g.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT, null); // Отрисовка фона
         g.drawImage(birdImage, 100, birdY, BIRD_DIAMETER, BIRD_DIAMETER, null); // Отрисовка птицы
@@ -125,7 +135,7 @@ public class FlappyBird extends JPanel implements ActionListener {
             g.drawString("Game Over", WIDTH / 3, HEIGHT / 2); // Сообщение об окончании игры
             g.drawString("Press Button to Restart", WIDTH / 12, HEIGHT / 2 + 40);// Подсказка для перезапуска
             startButton.setVisible(true); // Отображение кнопки
-        }
+            }
         else {
             startButton.setVisible(!gameStarted); // Скрытие кнопки
         }
