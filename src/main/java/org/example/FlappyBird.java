@@ -14,8 +14,8 @@ import java.util.Random; // Импорт для генерации случай�
 public class FlappyBird extends JPanel implements ActionListener {
     private final int WIDTH = 400, HEIGHT = 600; // Ширина и высота игрового окна
     private final int BIRD_DIAMETER = 65; // Диаметр птицы
-    private final int GRAVITY = 2; // Сила притяжения
-    private final int JUMP_STRENGTH = -10; // Сила прыжка
+    private final int GRAVITY = 1; // Сила притяжения (2)
+    private final int JUMP_STRENGTH = -8; // Сила прыжка (-10)
     private final int PIPE_WIDTH = 52; // Ширина трубы
     private final int PIPE_GAP = 150; // Интервал между верхней и нижней трубами
 
@@ -151,7 +151,7 @@ public class FlappyBird extends JPanel implements ActionListener {
                 }
 
                 // Проверка на столкновение
-                if (pipe.intersects(new Rectangle(100, birdY, BIRD_DIAMETER, BIRD_DIAMETER)) || birdY > HEIGHT) {
+                if (pipe.intersects(new Rectangle(100, birdY, BIRD_DIAMETER, BIRD_DIAMETER)) || birdY > HEIGHT) { // 100
                     gameOver = true; // Если есть столкновение, игра окончена
                     saveScore(); // Вызов метода для сохранения счета
                 }
